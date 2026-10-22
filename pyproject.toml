@@ -23,6 +23,10 @@ dependencies = [
     "uvicorn==0.54.0",
 ]
 
+[tool.uv]
+# The code runs from the repo root and is never installed, so uv must not try to build a package
+package = false
+
 [tool.ruff]
 line-length = 100
 
@@ -32,6 +36,9 @@ select = ["E", "F", "I"]
 [dependency-groups]
 dev = [
     "ipykernel==7.3.0",
+    "matplotlib==3.10.9",
+    "mlflow==3.17.2",
     "pre-commit==4.6.2",
     "ruff==0.17.1",
+    "seaborn==0.13.2",
 ]
