@@ -296,3 +296,4 @@ The schemas are in `src/web_service/lib/models.py` and the inference in `src/web
 - **Dependencies** are managed with uv. Add or update a package with `uv add <package>==<version>`, which updates `pyproject.toml` and `uv.lock`; notebook-only and tooling packages go in the dev group with `uv add --dev`.
 - **Code quality**: the pre-commit hooks run ruff (linting and formatting) and check that `uv.lock` is up to date. Run them on everything with `make lint`.
 - **CI**: GitHub Actions installs the locked environment and runs the hooks with Python 3.10 and 3.11 on every push and pull request (`.github/workflows/ci.yaml`).
+
