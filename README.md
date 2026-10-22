@@ -17,7 +17,7 @@ Welcome to your MLOps project! In this hands-on project, you'll build a complete
 
 Traditionally, determining an abalone's age requires:
 1. Cutting the shell through the cone
-2. Staining it 
+2. Staining it
 3. Counting rings under a microscope (very time-consuming!)
 
 **Your Goal**: Use easier-to-obtain physical measurements (shell weight, diameter, etc.) to predict the age automatically.
@@ -25,36 +25,72 @@ Traditionally, determining an abalone's age requires:
 📥 **Download**: Get the dataset from the [Kaggle page](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset)
 
 
+## 👥 Team
+
+| Name | GitHub |
+|------|--------|
+| Arnolfo Acero | [@aezacero](https://github.com/aezacero) |
+| Litong Hou | [@melo0430](https://github.com/melo0430) |
+| Martino Orioli | [@Martinoor](https://github.com/Martinoor) |
+| Chloe Vacca | [@chloe363](https://github.com/chloe363) |
+
 ## 🚀 Quick Start
 
 ### Prerequisites
 - GitHub account
 - [Kaggle account](https://www.kaggle.com/account/login?phase=startRegisterTab&returnUrl=%2F) (for dataset download)
 - Python 3.10 or 3.11
+- [uv](https://docs.astral.sh/uv/getting-started/installation/) and Git
 
 ### Setup Steps
 
-1. **Fork this repository** 
-   - ⚠️ **Important**: Uncheck "Copy the `main` branch only" to get all project branches
-   
-2. **Add your team members** as admins to your forked repository
-
-3. **Set up your development environment**:
+1. **Clone the repository**
    ```bash
-   # Create and activate a virtual environment
-   uv sync 
-   source venv/bin/activate # on Windows: venv\Scripts\activate
-
-   # Install pre-commit hooks for code quality
-    uv pip install pre-commit
-    uv run pre-commit install
+   git clone https://github.com/aezacero/xhec-mlops-2026-project.git
+   cd xhec-mlops-2026-project
    ```
+
+2. **Create the environment** (installs app and dev dependencies from `uv.lock` into `.venv/`)
+   ```bash
+   uv sync
+   ```
+
+3. **Install the pre-commit hooks** (ruff linting/formatting run on every commit)
+   ```bash
+   uv run pre-commit install
+   ```
+
+4. **(Optional) Check everything passes**
+   ```bash
+   uv run pre-commit run --all-files
+   ```
+
+Run any command inside the environment with `uv run <command>`, or activate it with `source .venv/bin/activate` (Windows: `.venv\Scripts\activate`).
+
+## 🏋️ Train the Model
+
+1. **Get the data**: download `abalone.csv` from the [Kaggle page](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset) and save it as `data/abalone.csv` (the `data/` folder is git-ignored).
+
+2. **Run the training** from the root of the repository:
+   ```bash
+   uv run python src/modelling/main.py data/abalone.csv
+   ```
+
+This cleans the data and trains a linear regression on 80% of it. It prints the RMSE, MAE and R² on the remaining 20%, next to a baseline that always predicts the mean, then saves the fitted encoder and model to `src/web_service/local_objects/` (`encoder.pkl` and `model.pkl`).
+
+| Module (`src/modelling/`) | Role |
+|---|---|
+| `main.py` | Runs the full training from the command line |
+| `preprocessing.py` | Loads and cleans the data, encodes the sex, builds the features |
+| `training.py` | Fits and evaluates the model |
+| `predicting.py` | Predicts the number of rings of new abalones with the saved encoder and model |
+| `utils.py` | Saves and loads the pickled objects |
 
 ## 📋 What You'll Build
 
 By the end of this project, you'll have created:
 
-### 🤖 **Automated ML Pipeline** 
+### 🤖 **Automated ML Pipeline**
 - Training workflows using Prefect
 - Automatic model retraining on schedule
 - Reproducible model and data processing
@@ -67,7 +103,7 @@ By the end of this project, you'll have created:
 ### 📊 **Production-Ready Code**
 - Clean, well-documented code
 - Automated testing and formatting
-- Proper error handling 
+- Proper error handling
 
 ## 📝 How to Work on This Project
 
@@ -102,7 +138,7 @@ git push
 
 Then:
 1. 📖 Read the PR_i.md file carefully
-2. 💻 Complete all the TODOs in the code  
+2. 💻 Complete all the TODOs in the code
 3. 🔧 Test your changes
 4. 📤 Open **ONE** pull request to your main branch
 5. ✅ Merge the pull request
@@ -147,16 +183,16 @@ uv sync
 
 Your project will be evaluated on:
 
-### 🔍 **Code Quality** 
+### 🔍 **Code Quality**
 - Clean, readable code structure
-- Proper naming conventions  
+- Proper naming conventions
 - Good use of docstrings and type hints
 
 ### 🎨 **Code Formatting**
 - Consistent style (automated with pre-commit)
 - Professional presentation
 
-### ⚙️ **Functionality** 
+### ⚙️ **Functionality**
 - Code runs without errors
 - All requirements implemented correctly
 
@@ -177,10 +213,10 @@ When you're done, your repository should contain:
 
 ✅ **Automated Training Pipeline**
 - [ ] Prefect workflows for model training
-- [ ] Separate modules for training and inference  
+- [ ] Separate modules for training and inference
 - [ ] Reproducible model and encoder generation
 
-✅ **Automated Deployment**  
+✅ **Automated Deployment**
 - [ ] Prefect deployment for regular retraining
 
 ✅ **Production API**
