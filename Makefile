@@ -53,3 +53,4 @@ docker-stop: ## Stop the running container
 clean: ## Remove the Python caches
 	find . -type d -name "__pycache__" -not -path "./.venv/*" -prune -exec rm -rf {} +
 	rm -rf .ruff_cache
+
