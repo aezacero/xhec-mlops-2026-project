@@ -80,11 +80,40 @@ This cleans the data and trains a linear regression on 80% of it. It prints the 
 
 | Module (`src/modelling/`) | Role |
 |---|---|
-| `main.py` | Runs the full training from the command line |
+| `main.py` | Runs the full training as a Prefect flow, from the command line |
+| `deployment.py` | Serves the training flow on a daily schedule |
 | `preprocessing.py` | Loads and cleans the data, encodes the sex, builds the features |
 | `training.py` | Fits and evaluates the model |
 | `predicting.py` | Predicts the number of rings of new abalones with the saved encoder and model |
 | `utils.py` | Saves and loads the pickled objects |
+
+## 🔁 Automate the Training with Prefect
+
+The training is a [Prefect](https://docs.prefect.io/) flow (`train_model_workflow` in `src/modelling/main.py`) made of five tasks: `prepare_data`, `split_data`, `fit_and_encode`, `train_and_evaluate` and `save_objects`. A deployment retrains the model **every day at 1 pm (Europe/Paris)**.
+
+Run every command from the root of the repository.
+
+1. **Point Prefect to a local server** (once per machine):
+   ```bash
+   uv run prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api
+   ```
+
+2. **Start the Prefect server** in a first terminal and leave it running. The UI is at http://127.0.0.1:4200.
+   ```bash
+   uv run prefect server start
+   ```
+
+3. **Run the training flow once** in a second terminal:
+   ```bash
+   uv run python src/modelling/main.py data/abalone.csv
+   ```
+   The run and its five tasks appear in the UI under *Runs*, with the metrics in the logs.
+
+4. **Start the scheduled deployment** in the second terminal and leave it running:
+   ```bash
+   uv run python src/modelling/deployment.py
+   ```
+   The `train-model` deployment appears in the UI under *Deployments* with its schedule. Click *Quick run* to trigger a training immediately instead of waiting for 1 pm. Scheduled runs only execute while this command is running; stop it with `Ctrl+C`.
 
 ## 📋 What You'll Build
 
