@@ -1,5 +1,3 @@
-# This module is the training flow: it reads the data, preprocesses it, trains a model and saves it.
-
 import argparse
 from pathlib import Path
 
