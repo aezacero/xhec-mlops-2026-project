@@ -29,9 +29,10 @@ Traditionally, determining an abalone's age requires:
 
 | Name | GitHub |
 |------|--------|
-| TODO | [@aezacero](https://github.com/aezacero) |
-| TODO | [@melo0430](https://github.com/melo0430) |
-| TODO | [@chloe363](https://github.com/chloe363) |
+| Arnolfo Acero | [@aezacero](https://github.com/aezacero) |
+| Litong Hou | [@melo0430](https://github.com/melo0430) |
+| Martino Orioli | [@Martinoor](https://github.com/Martinoor) |
+| Chloe Vacca | [@chloe363](https://github.com/chloe363) |
 
 ## 🚀 Quick Start
 
