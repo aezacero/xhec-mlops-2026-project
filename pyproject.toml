@@ -6,9 +6,39 @@ build-backend = "setuptools.build_meta"
 name = "xhec-mlops-project-student"
 version = "0.0.1"
 authors = [
-  { name = "username", email = "user@email.com" },
-] # TODO: add authors here
+  { name = "Arnolfo Acero", email = "arnolfo-enrique.acero@hec.edu" },
+  { name = "Litong Hou", email = "litong.hou@hec.edu" },
+  { name = "Martino Orioli", email = "martino.orioli@hec.edu" },
+  { name = "Chloe Vacca", email = "chloe.vacca@hec.edu" },
+]
 description = "X-HEC MLOps Project on Abalone age prediction model"
-requires-python = ">3.10" # TODO: update this version
+requires-python = ">=3.10,<3.12"
+dependencies = [
+    "fastapi==0.150.0",
+    "numpy==2.2.6",
+    "pandas==2.3.3",
+    "prefect==3.8.8",
+    "pydantic==2.14.1",
+    "scikit-learn==1.7.2",
+    "uvicorn==0.54.0",
+]
 
-# TODO: add pydantic, pre-commit and ruff as a dependency
+[tool.uv]
+# The code runs from the repo root and is never installed, so uv must not try to build a package
+package = false
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[dependency-groups]
+dev = [
+    "ipykernel==7.3.0",
+    "matplotlib==3.10.9",
+    "mlflow==3.17.2",
+    "pre-commit==4.6.2",
+    "ruff==0.17.1",
+    "seaborn==0.13.2",
+]
