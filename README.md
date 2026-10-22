@@ -67,6 +67,25 @@ Traditionally, determining an abalone's age requires:
 
 Run any command inside the environment with `uv run <command>`, or activate it with `source .venv/bin/activate` (Windows: `.venv\Scripts\activate`).
 
+## 🏋️ Train the Model
+
+1. **Get the data**: download `abalone.csv` from the [Kaggle page](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset) and save it as `data/abalone.csv` (the `data/` folder is git-ignored).
+
+2. **Run the training** from the root of the repository:
+   ```bash
+   uv run python src/modelling/main.py data/abalone.csv
+   ```
+
+This cleans the data and trains a linear regression on 80% of it. It prints the RMSE, MAE and R² on the remaining 20%, next to a baseline that always predicts the mean, then saves the fitted encoder and model to `src/web_service/local_objects/` (`encoder.pkl` and `model.pkl`).
+
+| Module (`src/modelling/`) | Role |
+|---|---|
+| `main.py` | Runs the full training from the command line |
+| `preprocessing.py` | Loads and cleans the data, encodes the sex, builds the features |
+| `training.py` | Fits and evaluates the model |
+| `predicting.py` | Predicts the number of rings of new abalones with the saved encoder and model |
+| `utils.py` | Saves and loads the pickled objects |
+
 ## 📋 What You'll Build
 
 By the end of this project, you'll have created:
